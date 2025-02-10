@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="InicioInterfaz" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" styleClass="fondoInterfaz"
+      fx:controller="org.example.bibliotecafx.Gestion.Gestion">
+
+    <AnchorPane prefHeight="400.0" prefWidth="600.0">
+
+        <VBox alignment="CENTER" spacing="20.0">
+            <Label text="BibliotecaFX" styleClass="tituloInterfaz"/>
+            <Button text="Autor" styleClass="botonInterfaz" onAction="#BotonAutor"/>
+            <Button text="Libro" styleClass="botonInterfaz" onAction="#BotonLibro"/>
+            <Button text="Socio" styleClass="botonInterfaz" onAction="#BotonSocio"/>
+            <Button text="Prestamo" styleClass="botonInterfaz" onAction="#BotonPrestamo"/>
+            <Button text="Salir" styleClass="botonInterfaz" onAction="#BotonSalir"/>
+        </VBox>
+
+    </AnchorPane>
+
+</VBox>

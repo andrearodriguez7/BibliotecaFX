@@ -1,0 +1,10 @@
+package org.example.bibliotecafx.Util;
+
+public class HibernateUtil {
+    public static SessionFactory getSessionFactory() {
+
+        Configuration configuration = new Configuration();
+        configuration.configure();
+        return configuration.buildSessionFactory();
+    }
+}
