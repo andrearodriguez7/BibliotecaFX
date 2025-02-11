@@ -1,24 +1,30 @@
 package org.example.bibliotecafx.entities;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Socio {
-    private int id; // Clave primaria
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String nombre;
     private String telefono;
     private String direccion;
 
-    public Socio(int id, String nombre, String telefono, String direccion) {
-        if (id <= 0) throw new IllegalArgumentException("ID debe ser mayor que 0");
-        this.id = id;
+    @OneToOne(mappedBy = "socio", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Prestamo prestamo;
+
+    public Socio() {}
+
+    public Socio(String nombre, String telefono, String direccion) {
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) {
-        if (id <= 0) throw new IllegalArgumentException("ID debe ser mayor que 0");
-        this.id = id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
@@ -29,13 +35,7 @@ public class Socio {
     public String getDireccion() { return direccion; }
     public void setDireccion(String direccion) { this.direccion = direccion; }
 
-    @Override
-    public String toString() {
-        return "Socio{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", direccion='" + direccion + '\'' +
-                '}';
-    }
+    public Prestamo getPrestamo() { return prestamo; }
+    public void setPrestamo(Prestamo prestamo) { this.prestamo = prestamo; }
 }
+

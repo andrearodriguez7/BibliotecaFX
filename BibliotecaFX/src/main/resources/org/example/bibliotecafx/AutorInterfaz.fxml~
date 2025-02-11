@@ -11,6 +11,7 @@
 
     <AnchorPane prefHeight="400.0" prefWidth="600.0">
         <Label text="Autor" styleClass="tituloInterfaz"/>
+
     </AnchorPane>
 
 </VBox>

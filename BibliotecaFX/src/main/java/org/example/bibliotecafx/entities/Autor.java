@@ -1,22 +1,28 @@
 package org.example.bibliotecafx.entities;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Autor {
-    private int id; // Clave primaria
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String nombre;
     private String nacionalidad;
 
-    public Autor(int id, String nombre, String nacionalidad) {
-        if (id <= 0) throw new IllegalArgumentException("ID debe ser mayor que 0");
-        this.id = id;
+    @OneToOne(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Libro libro;
+
+    public Autor() {}
+
+    public Autor(String nombre, String nacionalidad) {
         this.nombre = nombre;
         this.nacionalidad = nacionalidad;
     }
 
-    public int getId() { return id; }
-    public void setId(int id) {
-        if (id <= 0) throw new IllegalArgumentException("ID debe ser mayor que 0");
-        this.id = id;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
@@ -24,13 +30,9 @@ public class Autor {
     public String getNacionalidad() { return nacionalidad; }
     public void setNacionalidad(String nacionalidad) { this.nacionalidad = nacionalidad; }
 
-    @Override
-    public String toString() {
-        return "Autor{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", nacionalidad='" + nacionalidad + '\'' +
-                '}';
-    }
+    public Libro getLibro() { return libro; }
+    public void setLibro(Libro libro) { this.libro = libro; }
 }
+
+
 

@@ -1,6 +1,5 @@
 package org.example.bibliotecafx.Gestion;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 
@@ -47,18 +46,4 @@ public class Gestion {
    }
 
 
-    public void listarAutores(ActionEvent actionEvent) {
-    }
-
-    public void buscarAutor(ActionEvent actionEvent) {
-    }
-
-    public void eliminarAutor(ActionEvent actionEvent) {
-    }
-
-    public void modificarAutor(ActionEvent actionEvent) {
-    }
-
-    public void anadirAutor(ActionEvent actionEvent) {
-    }
 }

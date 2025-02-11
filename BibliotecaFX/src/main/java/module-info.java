@@ -10,6 +10,7 @@ module org.example.bibliotecafx {
     requires com.almasb.fxgl.all;
     requires java.naming;
     requires org.hibernate.orm.core;
+    requires jakarta.persistence;
 
     opens org.example.bibliotecafx to javafx.fxml;
     opens org.example.bibliotecafx.entities to org.hibernate.orm.core;

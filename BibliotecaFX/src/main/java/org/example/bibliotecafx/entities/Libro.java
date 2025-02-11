@@ -1,16 +1,26 @@
 package org.example.bibliotecafx.entities;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Libro {
-    private String isbn; // Clave primaria
+    @Id
+    private String isbn;
+
     private String titulo;
     private String editorial;
     private int anio;
-    private Autor autor; // Clave foránea
+
+    @OneToOne
+    @JoinColumn(name = "idAutor", unique = true)
+    private Autor autor;
+
+    @OneToOne(mappedBy = "libro", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Prestamo prestamo;
+
+    public Libro() {}
 
     public Libro(String isbn, String titulo, String editorial, int anio, Autor autor) {
-        if (isbn == null || isbn.isEmpty()) throw new IllegalArgumentException("ISBN no puede estar vacío");
-        if (anio < 0) throw new IllegalArgumentException("Año no puede ser negativo");
-
         this.isbn = isbn;
         this.titulo = titulo;
         this.editorial = editorial;
@@ -28,22 +38,12 @@ public class Libro {
     public void setEditorial(String editorial) { this.editorial = editorial; }
 
     public int getAnio() { return anio; }
-    public void setAnio(int anio) {
-        if (anio < 0) throw new IllegalArgumentException("Año no puede ser negativo");
-        this.anio = anio;
-    }
+    public void setAnio(int anio) { this.anio = anio; }
 
     public Autor getAutor() { return autor; }
     public void setAutor(Autor autor) { this.autor = autor; }
 
-    @Override
-    public String toString() {
-        return "Libro{" +
-                "isbn='" + isbn + '\'' +
-                ", titulo='" + titulo + '\'' +
-                ", editorial='" + editorial + '\'' +
-                ", anio=" + anio +
-                ", autor=" + autor.getNombre() +
-                '}';
-    }
+    public Prestamo getPrestamo() { return prestamo; }
+    public void setPrestamo(Prestamo prestamo) { this.prestamo = prestamo; }
 }
+

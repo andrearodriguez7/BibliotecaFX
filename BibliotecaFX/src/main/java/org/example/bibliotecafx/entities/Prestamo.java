@@ -1,50 +1,47 @@
 package org.example.bibliotecafx.entities;
 
-import java.util.Date;
+import jakarta.persistence.*;
+import java.time.LocalDate;
 
+@Entity
 public class Prestamo {
-    private Date fechaPrestamo;
-    private Date fechaDevolucion;
-    private Socio socio; // Clave foránea
-    private Libro libro; // Clave foránea
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public Prestamo(Date fechaPrestamo, Date fechaDevolucion, Socio socio, Libro libro) {
-        if (fechaPrestamo == null) throw new IllegalArgumentException("Fecha de préstamo no puede ser nula");
-        if (fechaDevolucion != null && fechaDevolucion.before(fechaPrestamo))
-            throw new IllegalArgumentException("Fecha de devolución no puede ser antes de la fecha de préstamo");
+    private LocalDate fechaPrestamo;
+    private LocalDate fechaDevolucion;
 
+    @OneToOne
+    @JoinColumn(name = "idSocio", unique = true)
+    private Socio socio;
+
+    @OneToOne
+    @JoinColumn(name = "isbn", unique = true)
+    private Libro libro;
+
+    public Prestamo() {}
+
+    public Prestamo(LocalDate fechaPrestamo, LocalDate fechaDevolucion, Socio socio, Libro libro) {
         this.fechaPrestamo = fechaPrestamo;
         this.fechaDevolucion = fechaDevolucion;
         this.socio = socio;
         this.libro = libro;
     }
 
-    public Date getFechaPrestamo() { return fechaPrestamo; }
-    public void setFechaPrestamo(Date fechaPrestamo) {
-        if (fechaPrestamo == null) throw new IllegalArgumentException("Fecha de préstamo no puede ser nula");
-        this.fechaPrestamo = fechaPrestamo;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public Date getFechaDevolucion() { return fechaDevolucion; }
-    public void setFechaDevolucion(Date fechaDevolucion) {
-        if (fechaDevolucion != null && fechaDevolucion.before(fechaPrestamo))
-            throw new IllegalArgumentException("Fecha de devolución no puede ser antes de la fecha de préstamo");
-        this.fechaDevolucion = fechaDevolucion;
-    }
+    public LocalDate getFechaPrestamo() { return fechaPrestamo; }
+    public void setFechaPrestamo(LocalDate fechaPrestamo) { this.fechaPrestamo = fechaPrestamo; }
+
+    public LocalDate getFechaDevolucion() { return fechaDevolucion; }
+    public void setFechaDevolucion(LocalDate fechaDevolucion) { this.fechaDevolucion = fechaDevolucion; }
 
     public Socio getSocio() { return socio; }
     public void setSocio(Socio socio) { this.socio = socio; }
 
     public Libro getLibro() { return libro; }
     public void setLibro(Libro libro) { this.libro = libro; }
-
-    @Override
-    public String toString() {
-        return "Toma{" +
-                "fechaPrestamo=" + fechaPrestamo +
-                ", fechaDevolucion=" + (fechaDevolucion != null ? fechaDevolucion : "No devuelto") +
-                ", socio=" + socio.getNombre() +
-                ", libro=" + libro.getTitulo() +
-                '}';
-    }
 }
+
