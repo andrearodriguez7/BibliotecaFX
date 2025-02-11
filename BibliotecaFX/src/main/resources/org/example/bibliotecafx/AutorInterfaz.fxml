@@ -35,6 +35,9 @@
         <Button text="Listar Todos los Autores" styleClass="botonInterfaz" onAction="#listarAutores" />
     </VBox>
 
+    <!-- Botón para volver a la pantalla de inicio -->
+    <Button text="Volver al Inicio" styleClass="botonInterfaz" onAction="#VolverInicioAutor" />
+
     <!-- Resultado de la búsqueda -->
     <Label fx:id="resultadoBusquedaLabel" styleClass="resultadoBusqueda" visible="false" />
 </VBox>

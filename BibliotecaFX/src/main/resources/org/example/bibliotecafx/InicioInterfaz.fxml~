@@ -1,25 +1,31 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="InicioInterfaz" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" styleClass="fondoInterfaz"
-      fx:controller="org.example.bibliotecafx.Gestion.Gestion">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import java.net.URL?>
+<VBox fx:id="InicioInterfaz" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" styleClass="background-style"
+      fx:controller="org.example.bibliotecafx.Gestion.Gestion"> <!-- Dirección del controlador -->
 
-    <AnchorPane>
-        <StackPane alignment="CENTER">
-            <!-- VBox para los botones, centrado en el StackPane -->
-            <VBox alignment="CENTER" spacing="25.0" maxWidth="600" maxHeight="400">
-                <Label text="BibliotecaFX" styleClass="tituloInterfaz"/>
-                <Button text="Autor" styleClass="botonInterfaz" onAction="#BotonAutor"/>
-                <Button text="Libro" styleClass="botonInterfaz" onAction="#BotonLibro"/>
-                <Button text="Socio" styleClass="botonInterfaz" onAction="#BotonSocio"/>
-                <Button text="Prestamo" styleClass="botonInterfaz" onAction="#BotonPrestamo"/>
-                <Button text="Salir" styleClass="botonInterfaz" onAction="#BotonSalir"/>
+    <AnchorPane prefHeight="700" prefWidth="900">
+        <children>
+
+            <Label text="Mi Biblioteca JavaFX" styleClass="textoInicio" layoutX="340" layoutY="90"/>
+
+            <VBox layoutX="350" layoutY="200" spacing="40">
+                <Button text="Autores" onAction="#BotonAutor" styleClass="Inicio"/>
+                <Button text="Libros" onAction="#BotonLibro" styleClass="Inicio"/>
+                <Button text="Socios" onAction="#BotonSocio" styleClass="Inicio"/>
+                <Button text="Préstamos" onAction="#BotonPrestamo" styleClass="Inicio"/>
+                <Button text="Salir" onAction="#BotonSalir" styleClass="Inicio"/>
             </VBox>
-        </StackPane>
+
+        </children>
     </AnchorPane>
+
 </VBox>

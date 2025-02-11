@@ -30,3 +30,46 @@
 .botonInterfaz:pressed {
     -fx-background-color: #FF1493; /* Cambia el color cuando se presiona */
 }
+
+.fondoInterfaz {
+    -fx-background-color: #F0F8FF; /* Azul pastel suave */
+}
+
+.tituloInterfaz {
+    -fx-font-size: 28px;
+    -fx-font-family: "Arial";
+    -fx-text-fill: #5F4B8B; /* Lila pastel */
+    -fx-font-weight: bold;
+}
+
+.formulario {
+    -fx-padding: 15px;
+    -fx-background-color: #FFFAFA; /* Color suave de fondo para el formulario */
+    -fx-border-color: #DDD;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+}
+
+.botonInterfaz {
+    -fx-background-color: #FFB6C1; /* Rosa pastel */
+    -fx-text-fill: #fff;
+    -fx-font-size: 18px;
+    -fx-padding: 15px 30px;
+    -fx-background-radius: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0.5, 1, 1);
+    -fx-pref-width: 200px;
+}
+
+.botonInterfaz:hover {
+    -fx-background-color: #FF69B4;
+}
+
+.botonInterfaz:pressed {
+    -fx-background-color: #FF1493;
+}
+
+.resultadoBusqueda {
+    -fx-font-size: 16px;
+    -fx-text-fill: #FF6347; /* Color rojo para mostrar el resultado */
+    -fx-font-weight: bold;
+}
