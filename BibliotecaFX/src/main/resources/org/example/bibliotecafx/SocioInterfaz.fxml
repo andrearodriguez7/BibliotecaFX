@@ -9,8 +9,25 @@
 <VBox fx:id="SocioInterfaz" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" styleClass="fondoInterfaz"
     fx:controller="org.example.bibliotecafx.Gestion.Gestion">
 
-    <AnchorPane prefHeight="400.0" prefWidth="600.0">
-        <Label text="Socio" styleClass="tituloInterfaz"/>
-    </AnchorPane>
+    <Label text="Gestión de Socios" styleClass="tituloInterfaz"/>
 
+    <VBox alignment="CENTER" spacing="15.0" styleClass="formulario">
+        <TextField fx:id="nombreSocioField" promptText="Nombre del socio"/>
+        <TextField fx:id="direccionSocioField" promptText="Dirección"/>
+        <TextField fx:id="telefonoSocioField" promptText="Teléfono"/>
+
+        <HBox alignment="CENTER" spacing="10.0">
+            <Button text="Añadir" styleClass="botonInterfaz" onAction="#anadirSocio"/>
+            <Button text="Modificar" styleClass="botonInterfaz" onAction="#modificarSocio"/>
+            <Button text="Eliminar" styleClass="botonInterfaz" onAction="#eliminarSocio"/>
+        </HBox>
+
+        <TextField fx:id="buscarSocioField" promptText="Buscar por nombre o teléfono"/>
+        <Button text="Buscar" styleClass="botonInterfaz" onAction="#buscarSocio"/>
+        <Button text="Listar Socios" styleClass="botonInterfaz" onAction="#listarSocios"/>
+
+        <TextArea fx:id="resultadoSocios" editable="false" styleClass="textAreaResultado"/>
+    </VBox>
+
+    <Button text="Volver a Inicio" styleClass="botonInterfaz" onAction="#volverInicio"/>
 </VBox>

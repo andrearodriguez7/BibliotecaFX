@@ -36,7 +36,8 @@ public class Gestion {
 
     private final AutorDAOImpl autorDAO = new AutorDAOImpl();
 
-    // Botones
+    // Métodos para cambiar de interfaz
+
     @FXML
     private void BotonAutor() throws IOException {
         new CargarInterfaz(InicioInterfaz, "/org/example/bibliotecafx/AutorInterfaz.fxml");
@@ -62,6 +63,16 @@ public class Gestion {
         System.exit(0);
     }
 
+    // Métodos de Autor
+
+    @FXML
+    private void VolverInicioAutor() throws IOException {
+        Stage stage = (Stage) AutorInterfaz.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecafx/InicioInterfaz.fxml"));
+        Scene scene = new Scene(loader.load(), 900, 700); // Ajusta el tamaño si es necesario
+        stage.setScene(scene);
+        stage.show();
+    }
 
     public void listarAutores(ActionEvent actionEvent) {
     }
@@ -76,13 +87,17 @@ public class Gestion {
     }
 
     public void anadirAutor(ActionEvent actionEvent) {
-
-
     }
 
+    // Métodos de Libro
+
     @FXML
-    private void VolverInicioAutor() throws IOException {
-        new CargarInterfaz(AutorInterfaz, "/org/example/bibliotecafx/InicioInterfaz.fxml");
+    private void VolverInicioLibro() throws IOException {
+        Stage stage = (Stage) LibroInterfaz.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecafx/InicioInterfaz.fxml"));
+        Scene scene = new Scene(loader.load(), 900, 700); // Ajusta el tamaño si es necesario
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void anadirLibro(ActionEvent actionEvent) {
@@ -100,8 +115,15 @@ public class Gestion {
     public void listarLibrosDisponibles(ActionEvent actionEvent) {
     }
 
-    public void volverInicio(ActionEvent actionEvent) {
+    // Métodos de Socio
 
+    @FXML
+    private void VolverInicioSocio() throws IOException {
+        Stage stage = (Stage) SocioInterfaz.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecafx/InicioInterfaz.fxml"));
+        Scene scene = new Scene(loader.load(), 900, 700); // Ajusta el tamaño si es necesario
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void anadirSocio(ActionEvent actionEvent) {
@@ -119,6 +141,17 @@ public class Gestion {
     public void listarSocios(ActionEvent actionEvent) {
     }
 
+    // Métodos de Préstamo
+
+    @FXML
+    private void VolverInicioPrestamo() throws IOException {
+        Stage stage = (Stage) PrestamoInterfaz.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecafx/InicioInterfaz.fxml"));
+        Scene scene = new Scene(loader.load(), 900, 700); // Ajusta el tamaño si es necesario
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void registrarPrestamo(ActionEvent actionEvent) {
     }
 
@@ -127,4 +160,15 @@ public class Gestion {
 
     public void verHistorial(ActionEvent actionEvent) {
     }
+
+    // Método común para volver al inicio desde cualquier interfaz
+    @FXML
+    private void volverInicio(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((TextField) actionEvent.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/bibliotecafx/InicioInterfaz.fxml"));
+        Scene scene = new Scene(loader.load(), 900, 700); // Ajusta el tamaño si es necesario
+        stage.setScene(scene);
+        stage.show();
+    }
 }
+

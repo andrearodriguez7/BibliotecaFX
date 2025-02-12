@@ -1,9 +1,11 @@
+/* Fondo general de la interfaz */
 .fondoInterfaz {
     -fx-background-color: #F0F8FF; /* Azul pastel suave */
     -fx-padding: 20px 30px;
     -fx-alignment: center;
 }
 
+/* Título de las interfaces */
 .tituloInterfaz {
     -fx-font-size: 28px;
     -fx-font-family: "Arial";
@@ -12,8 +14,9 @@
     -fx-padding: 20px;
 }
 
+/* Botones generales */
 .botonInterfaz {
-    -fx-background-color: #FFB6C1;
+    -fx-background-color: #FFB6C1; /* Rosa pastel */
     -fx-text-fill: #fff;
     -fx-font-size: 18px;
     -fx-padding: 15px 30px;
@@ -31,45 +34,30 @@
     -fx-background-color: #FF1493; /* Cambia el color cuando se presiona */
 }
 
-.fondoInterfaz {
-    -fx-background-color: #F0F8FF; /* Azul pastel suave */
-}
-
-.tituloInterfaz {
-    -fx-font-size: 28px;
-    -fx-font-family: "Arial";
-    -fx-text-fill: #5F4B8B; /* Lila pastel */
-    -fx-font-weight: bold;
-}
-
+/* Contenedor para formularios */
 .formulario {
     -fx-padding: 15px;
-    -fx-background-color: #FFFAFA; /* Color suave de fondo para el formulario */
+    -fx-background-color: #FFFAFA; /* Fondo rosa claro */
     -fx-border-color: #DDD;
     -fx-border-radius: 10px;
     -fx-border-width: 2px;
 }
 
-.botonInterfaz {
-    -fx-background-color: #FFB6C1; /* Rosa pastel */
-    -fx-text-fill: #fff;
-    -fx-font-size: 18px;
-    -fx-padding: 15px 30px;
-    -fx-background-radius: 20px;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0.5, 1, 1);
-    -fx-pref-width: 200px;
+/* Estilo para mostrar resultados de búsqueda o listas */
+.textAreaResultado {
+    -fx-background-color: #FFF0F5; /* Fondo lavanda pastel */
+    -fx-border-color: #FF69B4; /* Borde rosa */
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+    -fx-font-size: 16px;
+    -fx-text-fill: #5F4B8B; /* Texto en lila pastel */
+    -fx-wrap-text: true;
 }
 
-.botonInterfaz:hover {
-    -fx-background-color: #FF69B4;
-}
-
-.botonInterfaz:pressed {
-    -fx-background-color: #FF1493;
-}
-
+/* Texto para mensajes de resultado */
 .resultadoBusqueda {
     -fx-font-size: 16px;
-    -fx-text-fill: #FF6347; /* Color rojo para mostrar el resultado */
+    -fx-text-fill: #FF6347; /* Color rojo para resaltar el resultado */
     -fx-font-weight: bold;
 }
+
