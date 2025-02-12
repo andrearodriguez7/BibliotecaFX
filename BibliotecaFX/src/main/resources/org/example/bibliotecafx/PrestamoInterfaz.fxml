@@ -9,24 +9,5 @@
 <VBox fx:id="PrestamoInterfaz" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" styleClass="fondoInterfaz"
       fx:controller="org.example.bibliotecafx.Gestion.Gestion">
 
-    <Label text="Gestión de Préstamos" styleClass="tituloInterfaz"/>
 
-    <VBox alignment="CENTER" spacing="15.0" styleClass="formulario">
-        <TextField fx:id="socioIDField" promptText="ID del Socio"/>
-        <TextField fx:id="libroIDField" promptText="ID del Libro"/>
-        <DatePicker fx:id="fechaPrestamoPicker" promptText="Fecha de Préstamo"/>
-        <DatePicker fx:id="fechaDevolucionPicker" promptText="Fecha de Devolución"/>
-
-        <Button text="Registrar Préstamo" styleClass="botonInterfaz" onAction="#registrarPrestamo"/>
-
-        <Separator/>
-
-        <Button text="Listar Libros Prestados" styleClass="botonInterfaz" onAction="#listarLibrosPrestados"/>
-        <TextField fx:id="historialSocioField" promptText="ID del Socio para Historial"/>
-        <Button text="Ver Historial de Préstamos" styleClass="botonInterfaz" onAction="#verHistorial"/>
-
-        <TextArea fx:id="resultadoPrestamos" editable="false" styleClass="textAreaResultado"/>
-    </VBox>
-
-    <Button text="Volver a Inicio" styleClass="botonInterfaz" onAction="#volverInicio"/>
 </VBox>

@@ -9,35 +9,34 @@
 <VBox fx:id="AutorInterfaz" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" styleClass="fondoInterfaz"
       fx:controller="org.example.bibliotecafx.Gestion.Gestion">
 
-    <!-- Título -->
-    <AnchorPane prefHeight="400.0" prefWidth="600.0">
-        <Label text="Gestión de Autores" styleClass="tituloInterfaz"/>
+    <AnchorPane prefHeight="700" prefWidth="900" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+
+        <children>
+
+            <HBox layoutX="50" layoutY="50" spacing="20">
+                <Button onAction="#AgregarAutor" text="Añadir Autor" textAlignment="CENTER"/>
+                <Button onAction="#EliminarAutor" text="Eliminar Autor" textAlignment="CENTER"/>
+                <Button onAction="#BuscarAutor" text="Buscar Autor por Nombre" textAlignment="CENTER"/>
+                <Button onAction="#ListarAutores" text="Listar Autores" textAlignment="CENTER"/>
+                <Button onAction="#ModificarAutor" text="Modificar Autor" textAlignment="CENTER"/>
+                <Button onAction="#VolverAutor" text="Volver" textAlignment="CENTER"/>
+                <Button onAction="#LimpiarAutor" text="Limpiar" textAlignment="CENTER"/>
+            </HBox>
+
+            <HBox layoutY="100" layoutX="100" spacing="20">
+                <Label text="Nombre:"/>
+                <TextField fx:id="NombreAutor"/>
+
+                <Label text="Nacionalidad:"/>
+                <TextField fx:id="NacionalidadAutor"/>
+
+                <Label text="Id:"/>
+                <TextField fx:id="IdAutor"/>
+            </HBox>
+
+            <TextArea fx:id="AreaAutores" layoutY="150" layoutX="100" prefWidth="700" prefHeight="150"/>
+
+        </children>
+
     </AnchorPane>
-
-    <!-- Formulario de Añadir autor -->
-    <VBox alignment="CENTER" spacing="10.0" styleClass="formulario">
-        <HBox spacing="10.0">
-            <Label text="Nombre: " />
-            <TextField fx:id="nombreAutorField" promptText="Introduce el nombre del autor" />
-        </HBox>
-        <HBox spacing="10.0">
-            <Label text="Nacionalidad: " />
-            <TextField fx:id="nacionalidadAutorField" promptText="Introduce la nacionalidad" />
-        </HBox>
-        <Button text="Añadir Autor" styleClass="botonInterfaz" onAction="#anadirAutor" />
-    </VBox>
-
-    <!-- Opciones de Gestión de Autores -->
-    <VBox alignment="CENTER" spacing="15.0">
-        <Button text="Modificar Autor" styleClass="botonInterfaz" onAction="#modificarAutor" />
-        <Button text="Eliminar Autor" styleClass="botonInterfaz" onAction="#eliminarAutor" />
-        <Button text="Buscar Autor por Nombre" styleClass="botonInterfaz" onAction="#buscarAutor" />
-        <Button text="Listar Todos los Autores" styleClass="botonInterfaz" onAction="#listarAutores" />
-    </VBox>
-
-    <!-- Botón para volver a la pantalla de inicio -->
-    <Button text="Volver al Inicio" styleClass="botonInterfaz" onAction="#VolverInicioAutor" />
-
-    <!-- Resultado de la búsqueda -->
-    <Label fx:id="resultadoBusquedaLabel" styleClass="resultadoBusqueda" visible="false" />
 </VBox>

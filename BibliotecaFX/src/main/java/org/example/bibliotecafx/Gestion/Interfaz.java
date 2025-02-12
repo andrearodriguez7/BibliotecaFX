@@ -27,13 +27,13 @@ public class Interfaz extends Application {
         stage.show();
     }
 
-   /* public static void crearBaseDatos() { // Abrir una sesión de Hibernate
+   public static void crearBaseDatos() { // Abrir una sesión de Hibernate
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
-    }*/
+    }
 
     public static void main(String[] args) {
-       // crearBaseDatos();
+        crearBaseDatos();
         launch();
     }
 }

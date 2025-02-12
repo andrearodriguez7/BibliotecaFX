@@ -4,7 +4,9 @@ import org.example.bibliotecafx.Util.HibernateUtil;
 import org.example.bibliotecafx.entities.Socio;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SocioDAOImpl implements ISocioDAO {
@@ -28,6 +30,28 @@ public class SocioDAOImpl implements ISocioDAO {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.get(Socio.class, id);
         }
+    }
+
+    @Override
+    public List<Socio> buscarPorParametro(String parametro) {
+        Transaction transaction = null;
+        List<Socio> sociosEncontrados = new ArrayList<>();
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            String hql = "FROM Socio s WHERE LOWER(s.nombreSocio) LIKE LOWER(:parametro) OR s.telefono LIKE :parametro";
+            Query<Socio> query = session.createQuery(hql, Socio.class);
+            query.setParameter("parametro", "%" + parametro + "%");
+            sociosEncontrados = query.list();
+            transaction.commit();
+
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            System.out.println("\n Error al buscar socios por parámetro: " + e.getMessage());
+        }
+        return sociosEncontrados;
     }
 
     @Override

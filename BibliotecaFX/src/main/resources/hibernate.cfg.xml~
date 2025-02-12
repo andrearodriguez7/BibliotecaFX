@@ -16,7 +16,7 @@
         <property name="hibernate.show_sql">true</property>
 
         <!-- Utiliza 'update' para no borrar datos al reiniciar -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
 
         <!-- Sirve para definir las clases -->
         <mapping class="org.example.bibliotecafx.entities.Autor"/>

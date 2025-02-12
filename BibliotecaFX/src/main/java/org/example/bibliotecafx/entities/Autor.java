@@ -1,6 +1,7 @@
 package org.example.bibliotecafx.entities;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 public class Autor {
@@ -11,8 +12,9 @@ public class Autor {
     private String nombre;
     private String nacionalidad;
 
-    @OneToOne(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Libro libro;
+    // Relación uno a muchos (Un autor puede tener varios libros)
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Libro> libros;
 
     public Autor() {}
 
@@ -21,6 +23,7 @@ public class Autor {
         this.nacionalidad = nacionalidad;
     }
 
+    // Getters y setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -30,9 +33,10 @@ public class Autor {
     public String getNacionalidad() { return nacionalidad; }
     public void setNacionalidad(String nacionalidad) { this.nacionalidad = nacionalidad; }
 
-    public Libro getLibro() { return libro; }
-    public void setLibro(Libro libro) { this.libro = libro; }
+    public List<Libro> getLibros() { return libros; }
+    public void setLibros(List<Libro> libros) { this.libros = libros; }
 }
+
 
 
 

@@ -10,4 +10,6 @@ public interface ISocioDAO {
     void actualizarSocio(Socio socio);
     void eliminarSocio(Integer id);
     List<Socio> listarTodosLosSocios();
+
+    List<Socio> buscarPorParametro(String parametro);
 }

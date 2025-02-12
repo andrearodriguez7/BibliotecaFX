@@ -1,60 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
+<?import javafx.scene.control.*?>
 <?import javafx.collections.FXCollections?>
-<VBox fx:id="LibroInterfaz" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" styleClass="fondoInterfaz"
+
+<VBox fx:id="LibroInterfaz" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="org.example.bibliotecafx.Gestion.Gestion">
 
-    <Label text="Gestión de Libros" styleClass="tituloInterfaz"/>
 
-    <GridPane hgap="10" vgap="10" alignment="CENTER">
-        <Label text="Título:"/>
-        <TextField fx:id="tituloLibroField"/>
-
-        <Label text="ISBN:"/>
-        <TextField fx:id="isbnLibroField"/>
-
-        <Label text="Autor:"/>
-        <TextField fx:id="autorLibroField"/>
-
-        <Label text="Editorial:"/>
-        <TextField fx:id="editorialLibroField"/>
-
-        <Label text="Año de publicación:"/>
-        <TextField fx:id="anioLibroField"/>
-    </GridPane>
-
-    <HBox spacing="10" alignment="CENTER">
-        <Button text="Añadir" styleClass="botonInterfaz" onAction="#anadirLibro"/>
-        <Button text="Modificar" styleClass="botonInterfaz" onAction="#modificarLibro"/>
-        <Button text="Eliminar" styleClass="botonInterfaz" onAction="#eliminarLibro"/>
-    </HBox>
-
-    <HBox spacing="10" alignment="CENTER">
-        <Label text="Buscar por: "/>
-        <ComboBox fx:id="criterioBusquedaCombo">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Título"/>
-                    <String fx:value="Autor"/>
-                    <String fx:value="ISBN"/>
-                </FXCollections>
-            </items>
-        </ComboBox>
-        <TextField fx:id="busquedaLibroField"/>
-        <Button text="Buscar" styleClass="botonInterfaz" onAction="#buscarLibro"/>
-    </HBox>
-
-    <Button text="Listar Libros Disponibles" styleClass="botonInterfaz" onAction="#listarLibrosDisponibles"/>
-
-    <!-- Área de texto para mostrar resultados -->
-    <TextArea fx:id="resultadoTextArea" editable="false" prefHeight="150" prefWidth="400" wrapText="true" styleClass="textAreaResultado"/>
-
-    <Button text="Volver a Inicio" styleClass="botonInterfaz" onAction="#volverInicio"/>
 
 </VBox>

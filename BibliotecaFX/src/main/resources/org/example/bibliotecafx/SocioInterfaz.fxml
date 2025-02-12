@@ -9,25 +9,41 @@
 <VBox fx:id="SocioInterfaz" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" styleClass="fondoInterfaz"
     fx:controller="org.example.bibliotecafx.Gestion.Gestion">
 
-    <Label text="Gestión de Socios" styleClass="tituloInterfaz"/>
+    <AnchorPane prefHeight="700" prefWidth="900" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
 
-    <VBox alignment="CENTER" spacing="15.0" styleClass="formulario">
-        <TextField fx:id="nombreSocioField" promptText="Nombre del socio"/>
-        <TextField fx:id="direccionSocioField" promptText="Dirección"/>
-        <TextField fx:id="telefonoSocioField" promptText="Teléfono"/>
+        <children>
 
-        <HBox alignment="CENTER" spacing="10.0">
-            <Button text="Añadir" styleClass="botonInterfaz" onAction="#anadirSocio"/>
-            <Button text="Modificar" styleClass="botonInterfaz" onAction="#modificarSocio"/>
-            <Button text="Eliminar" styleClass="botonInterfaz" onAction="#eliminarSocio"/>
-        </HBox>
+            <HBox layoutX="50" layoutY="50" spacing="20">
+                <Button onAction="#AgregarSocio" text="Añadir Socio" textAlignment="CENTER"/>
+                <Button onAction="#EliminarSocio" text="Eliminar Socio" textAlignment="CENTER"/>
+                <Button onAction="#BuscarSocio" text="Buscar Socio por Nombre o Numero de Telefono" textAlignment="CENTER"/>
+                <Button onAction="#ListarSocios" text="Listar Socios" textAlignment="CENTER"/>
+                <Button onAction="#ModificarSocio" text="Modificar Socio" textAlignment="CENTER"/>
+                <Button onAction="#VolverSocio" text="Volver" textAlignment="CENTER"/>
+                <Button onAction="#LimpiarSocio" text="Limpiar" textAlignment="CENTER"/>
+            </HBox>
 
-        <TextField fx:id="buscarSocioField" promptText="Buscar por nombre o teléfono"/>
-        <Button text="Buscar" styleClass="botonInterfaz" onAction="#buscarSocio"/>
-        <Button text="Listar Socios" styleClass="botonInterfaz" onAction="#listarSocios"/>
+            <HBox layoutY="100" layoutX="100" spacing="20">
+                <Label text="Nombre:"/>
+                <TextField fx:id="NombreSocio"/>
 
-        <TextArea fx:id="resultadoSocios" editable="false" styleClass="textAreaResultado"/>
-    </VBox>
+                <Label text="Direccion:"/>
+                <TextField fx:id="DireccionSocio" prefWidth="300"/>
 
-    <Button text="Volver a Inicio" styleClass="botonInterfaz" onAction="#volverInicio"/>
+            </HBox>
+
+            <HBox layoutX="100" layoutY="150" spacing="20">
+                <Label text="Telefono:"/>
+                <TextField fx:id="TelefonoSocio"/>
+
+                <Label text="Id:"/>
+                <TextField fx:id="IdSocio"/>
+            </HBox>
+
+            <TextArea fx:id="AreaSocios" layoutY="300" layoutX="100" prefWidth="700" prefHeight="150"/>
+
+        </children>
+
+    </AnchorPane>
+
 </VBox>
