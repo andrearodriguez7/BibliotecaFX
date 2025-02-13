@@ -42,7 +42,7 @@
             </HBox>
 
 
-            <TextArea fx:id="AreaLibros" layoutY="300" layoutX="100" prefWidth="700" prefHeight="150"/>
+            <TextArea fx:id="AreaSocios" layoutY="300" layoutX="100" prefWidth="700" prefHeight="150"/>
 
         </children>
 

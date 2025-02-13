@@ -38,10 +38,7 @@ public class LibroDAOImpl implements ILibroDAO {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-
-            // Usamos session.merge() para actualizar el libro
-            session.merge(libro);  // merge actualiza si el libro ya existe, o lo inserta si no existe
-
+            session.merge(libro);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) transaction.rollback();

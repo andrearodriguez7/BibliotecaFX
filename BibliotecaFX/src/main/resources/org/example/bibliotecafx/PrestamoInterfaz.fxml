@@ -9,5 +9,34 @@
 <VBox fx:id="PrestamoInterfaz" alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml" styleClass="fondoInterfaz"
       fx:controller="org.example.bibliotecafx.Gestion.Gestion">
 
+    <AnchorPane prefHeight="700" prefWidth="900" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+
+        <children>
+
+            <HBox layoutX="175" layoutY="50" spacing="20">
+                <Button onAction="#RegistroPrestamos" text="Registrar Préstamos" textAlignment="CENTER"/>
+                <Button onAction="#ListarLibrosPrestados" text="Listar Libros Prestados" textAlignment="CENTER"/>
+                <Button onAction="#ListarHistorial" text="Listar Historial" textAlignment="CENTER"/>
+                <Button onAction="#VolverPrestamos" text="Volver" textAlignment="CENTER"/>
+                <Button onAction="#LimpiarPrestamos" text="Limpiar" textAlignment="CENTER"/>
+            </HBox>
+
+            <HBox layoutY="150" layoutX="40" spacing="20">
+                <Label text="Fecha Prestamo:"/>
+                <TextField fx:id="FechaPrestamo"/>
+
+                <Label text="Listar Libros Prestados:"/>
+                <TextField fx:id="ListarLibrosPrestados"/>
+
+                <Label text="Listar Historial:"/>
+                <TextField fx:id="ListarHistorial"/>
+
+            </HBox>
+
+            <TextArea fx:id="AreaPrestamos" layoutY="300" layoutX="100" prefWidth="700" prefHeight="150"/>
+
+        </children>
+
+    </AnchorPane>
 
 </VBox>

@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import org.example.bibliotecafx.DAO.AutorDAOImpl;
+import org.example.bibliotecafx.DAO.LibroDAOImpl;
 import org.example.bibliotecafx.DAO.SocioDAOImpl;
 import org.example.bibliotecafx.Util.HibernateUtil;
 import org.example.bibliotecafx.entities.Autor;
@@ -68,6 +69,33 @@ public class Gestion {
     TextArea AreaSocios;
 
     private final SocioDAOImpl socioDAO = new SocioDAOImpl();
+
+    // Botones Libro
+
+    @FXML
+    private TextField TituloLibro;
+
+    @FXML
+    private TextField ISBNLibro;
+
+    @FXML
+    private TextField AnyoPublicacionLibro;
+
+    @FXML
+    private TextField AutorLibro;
+
+    @FXML
+    private TextField EditorialLibro;
+
+    @FXML
+    TextArea AreaLibros;
+
+    private final LibroDAOImpl libroDAO = new LibroDAOImpl();
+
+    // Botones Prestamos
+
+
+    // Botones
 
     public void BotonAutor(ActionEvent actionEvent) throws IOException {
         new CargarInterfaz(InicioInterfaz, "/org/example/bibliotecafx/AutorInterfaz.fxml");
@@ -278,7 +306,7 @@ public class Gestion {
         if (!telefono.isEmpty()) filledCount++;
 
         if (filledCount > 1) {
-            showAlert(Alert.AlertType.ERROR, "Error", "Solo se puede buscar por un parámetro: Nombre o Teléfono.");
+            AreaSocios.setText("Solo se puede buscar por un parámetro: Nombre o Teléfono.");
             return;
         }
 
@@ -294,21 +322,20 @@ public class Gestion {
 
         if (sociosEncontrados.isEmpty()) {
             AreaSocios.setText("No se encontraron socios con ese criterio.");
-            showAlert(Alert.AlertType.WARNING, "No encontrado", "No se encontró ningún socio con ese dato.");
         } else if (sociosEncontrados.size() == 1) {
             Socio socio = sociosEncontrados.get(0);
-            NombreSocio.setText(socio.getNombreSocio());
+            NombreSocio.setText(socio.getNombre());
             DireccionSocio.setText(socio.getDireccion());
             TelefonoSocio.setText(socio.getTelefono());
-            IdSocio.setText(String.valueOf(socio.getIdSocio()));
-            showAlert(Alert.AlertType.INFORMATION, "Éxito", "Socio encontrado. Datos cargados en los campos.");
+            IdSocio.setText(String.valueOf(socio.getId()));
+            AreaSocios.setText("Socio encontrado. Datos cargados en los campos.");
         } else {
             StringBuilder resultado = new StringBuilder();
             for (Socio socio : sociosEncontrados) {
                 resultado.append(socio.toString()).append("\n");
             }
             AreaSocios.setText(resultado.toString());
-            showAlert(Alert.AlertType.INFORMATION, "Éxito", "Múltiples socios encontrados.");
+            AreaSocios.setText("Múltiples socios encontrados.");
         }
     }
 
@@ -326,6 +353,104 @@ public class Gestion {
 
 
     // Botones Libro
+
+    public void AgregarLibro(ActionEvent actionEvent) {
+        String titulo = TituloLibro.getText();
+        String isbn = ISBNLibro.getText();
+        int anyo = Integer.parseInt(AnyoPublicacionLibro.getText());
+        String aux = AutorLibro.getText();
+
+        Autor autor = AutorDAO.obtenerAutor(aux);
+        if (autor == null) {
+            AreaLibros.setText("Error: El autor no existe en la base de datos.");
+            return;
+        }
+
+        String editorial = EditorialLibro.getText();
+
+        Libro libro = new Libro(titulo, isbn, editorial, anyo, autor);
+        libroDAO.agregarLibro(libro);
+        AreaLibros.setText("Libro agregado correctamente.");
+    }
+    public void EliminarLibro(ActionEvent actionEvent) {
+        String isbn = ISBNLibro.getText();
+        libroDAO.eliminarLibro(isbn);
+        AreaLibros.setText("Libro eliminado correctamente.");
+    }
+
+    public void ModificarLibro(ActionEvent actionEvent) {
+        // Recuperar los valores de los campos de texto
+        String titulo = TituloLibro.getText();
+        String isbn = ISBNLibro.getText();
+        int anyo = Integer.parseInt(AnyoPublicacionLibro.getText());
+        String aux = AutorLibro.getText();
+
+        // Obtener el autor, al igual que en el método AgregarLibro
+        Autor autor = AutorDAO.obtenerAutor(aux);
+        if (autor == null) {
+            AreaLibros.setText("Error: El autor no existe en la base de datos.");
+            return;
+        }
+
+        String editorial = EditorialLibro.getText();
+
+        // Buscar el libro en la base de datos por el ISBN (puedes usar también ID si prefieres)
+        Libro libro = libroDAO.obtenerLibro(isbn);
+        if (libro == null) {
+            AreaLibros.setText("Error: No se encontró el libro con el ISBN proporcionado.");
+            return;
+        }
+
+        // Modificar los campos del libro con los valores nuevos
+        libro.setTitulo(titulo);
+        libro.setAnyoPublicacion(anyo);
+        libro.setEditorial(editorial);
+        libro.setAutor(autor);
+
+        // Actualizar el libro en la base de datos
+        libroDAO.actualizarLibro(libro);
+
+        // Mensaje de éxito
+        AreaLibros.setText("Libro modificado correctamente.");
+    }
+
+    public void BuscarLibro(ActionEvent actionEvent) {
+        String isbn = ISBNLibro.getText();
+        Libro libro = libroDAO.obtenerLibro(isbn);
+
+        if (libro != null) {
+            TituloLibro.setText(libro.getTitulo());
+            AutorLibro.setText(libro.getAutor().getNombre());
+            AnyoPublicacionLibro.setText(String.valueOf(libro.getAnyoPublicacion()));
+            EditorialLibro.setText(libro.getEditorial());
+            AreaLibros.setText("Libro encontrado.");
+        } else {
+            AreaLibros.setText("Libro no encontrado.");
+        }
+    }
+
+    public void ListarLibro(ActionEvent actionEvent) {
+        List<Libro> libros = libroDAO.listarLibrosDisponibles();
+        StringBuilder sb = new StringBuilder("Libros disponibles:\n");
+
+        for (Libro libro : libros) {
+            sb.append(libro.toString()).append("\n");
+        }
+        AreaLibros.setText(sb.toString());
+    }
+
+    public void VolverLibro(ActionEvent actionEvent) throws IOException {
+        new CargarInterfaz(LibroInterfaz, "/org/example/bibliotecafx/InicioInterfaz.fxml");
+    }
+
+    public void LimpiarLibro() {
+        TituloLibro.clear();
+        ISBNLibro.clear();
+        AnyoPublicacionLibro.clear();
+        AutorLibro.clear();
+        EditorialLibro.clear();
+        AreaSocios.clear();
+    }
 
 
     // Botones Préstamo
