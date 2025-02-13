@@ -43,9 +43,6 @@ public class PrestamoDAOImpl implements IPrestamoDAO {
     @Override
     public List<Prestamo> obtenerHistorialPrestamosPorSocio(Integer idSocio) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            // Verificar si el idSocio se pasa correctamente
-            System.out.println("Buscando préstamos para el socio con ID: " + idSocio);
-
             // Consulta para obtener el historial de préstamos de un socio específico
             String hql = "FROM Prestamo p WHERE p.socio.id = :idSocio";
             return session.createQuery(hql, Prestamo.class)

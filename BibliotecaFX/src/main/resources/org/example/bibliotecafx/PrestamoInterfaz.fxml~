@@ -36,13 +36,13 @@
 
             <HBox layoutY="200" layoutX="40" spacing="20">
 
-                <!-- Fecha de inicio (Préstamo) -->
-                <Label text="Fecha del Préstamo:"/>
-                <DatePicker fx:id="FechaPrestamo"/>
+            <!-- Fecha de inicio -->
+            <Label text="Fecha del Préstamo:"/>
+            <TextField fx:id="FechaPrestamo" promptText="Fecha de inicio (dd/mm/yyyy)"/>
 
-                <!-- Fecha de devolución -->
-                <Label text="Fecha de Devolución:"/>
-                <DatePicker fx:id="FechaDevolucion"/>
+            <!-- Fecha de devolución -->
+            <Label text="Fecha de Devolución:"/>
+            <TextField fx:id="FechaDevolucion" promptText="Fecha de devolución (dd/mm/yyyy)"/>
 
             </HBox>
 

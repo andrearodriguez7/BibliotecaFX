@@ -611,7 +611,7 @@ public class Gestion {
     }
 
     public void ListarHistorialSocio(ActionEvent actionEvent) {
-        String socioIdStr = SocioId.getText();  // Obtener el ID del socio
+        String socioIdStr = IdSocio.getText();  // Obtener el ID del socio
         if (!socioIdStr.isEmpty()) {
             try {
                 Integer idSocio = Integer.parseInt(socioIdStr);  // Convertir el ID del socio a entero
