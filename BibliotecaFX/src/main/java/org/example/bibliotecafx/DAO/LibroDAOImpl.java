@@ -9,7 +9,9 @@ import java.util.List;
 
 public class LibroDAOImpl implements ILibroDAO {
 
-    public LibroDAOImpl() {}
+    public LibroDAOImpl() {
+    }
+
     @Override
     public void agregarLibro(Libro libro) {
         Transaction transaction = null;

@@ -6,16 +6,19 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import org.example.bibliotecafx.DAO.AutorDAOImpl;
 import org.example.bibliotecafx.DAO.LibroDAOImpl;
+import org.example.bibliotecafx.DAO.PrestamoDAOImpl;
 import org.example.bibliotecafx.DAO.SocioDAOImpl;
 import org.example.bibliotecafx.Util.HibernateUtil;
 import org.example.bibliotecafx.entities.Autor;
 import org.example.bibliotecafx.entities.Libro;
+import org.example.bibliotecafx.entities.Prestamo;
 import org.example.bibliotecafx.entities.Socio;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Gestion {
@@ -93,6 +96,21 @@ public class Gestion {
     private final LibroDAOImpl libroDAO = new LibroDAOImpl();
 
     // Botones Prestamos
+
+    @FXML
+    private TextField FechaPrestamo;
+
+    @FXML
+    private TextField ListarLibrosPrestados;
+
+    @FXML
+    private TextField ListarHistorial;
+
+
+    @FXML
+    TextArea AreaPrestamos;
+
+    private PrestamoDAOImpl prestamoDAO = new PrestamoDAOImpl();
 
 
     // Botones
@@ -302,9 +320,12 @@ public class Gestion {
         String nombre = NombreSocio.getText().trim();
         String telefono = TelefonoSocio.getText().trim();
         int filledCount = 0;
+
+        // Contamos cuántos campos están llenos
         if (!nombre.isEmpty()) filledCount++;
         if (!telefono.isEmpty()) filledCount++;
 
+        // Si ambos están llenos, mostramos un mensaje de error
         if (filledCount > 1) {
             AreaSocios.setText("Solo se puede buscar por un parámetro: Nombre o Teléfono.");
             return;
@@ -312,17 +333,20 @@ public class Gestion {
 
         String parametro = !nombre.isEmpty() ? nombre : telefono;
 
+        // Si no se ha introducido ningún valor, mostramos un mensaje de error
         if (parametro.isEmpty()) {
             AreaSocios.setText("Ingrese un nombre o teléfono para buscar.");
             return;
         }
 
+        // Realizamos la búsqueda de socios
         List<Socio> sociosEncontrados = socioDAO.buscarPorParametro(parametro);
         AreaSocios.clear();
 
         if (sociosEncontrados.isEmpty()) {
             AreaSocios.setText("No se encontraron socios con ese criterio.");
         } else if (sociosEncontrados.size() == 1) {
+            // Si encontramos un solo socio, cargamos los datos en los campos
             Socio socio = sociosEncontrados.get(0);
             NombreSocio.setText(socio.getNombre());
             DireccionSocio.setText(socio.getDireccion());
@@ -330,6 +354,7 @@ public class Gestion {
             IdSocio.setText(String.valueOf(socio.getId()));
             AreaSocios.setText("Socio encontrado. Datos cargados en los campos.");
         } else {
+            // Si encontramos múltiples socios, mostramos la lista
             StringBuilder resultado = new StringBuilder();
             for (Socio socio : sociosEncontrados) {
                 resultado.append(socio.toString()).append("\n");
@@ -454,6 +479,67 @@ public class Gestion {
 
 
     // Botones Préstamo
+    public void RegistroPrestamos(ActionEvent actionEvent) {
+    }
+
+
+    public void ListarLibrosPrestados(ActionEvent actionEvent) {
+        try {
+            // Obtener los préstamos activos (sin fecha de devolución)
+            List<Prestamo> prestamosActivos = prestamoDAO.listarPrestamosActivos();
+
+            // Crear un StringBuilder para mostrar los resultados en el área de texto
+            StringBuilder sb = new StringBuilder();
+            for (Prestamo prestamo : prestamosActivos) {
+                sb.append("Libro: ").append(prestamo.getLibro().getTitulo())
+                        .append(" | Socio: ").append(prestamo.getSocio().getNombre())
+                        .append(" | Fecha de Préstamo: ").append(prestamo.getFechaPrestamo()).append("\n");
+            }
+
+            // Mostrar los resultados en el área de texto
+            AreaPrestamos.setText(sb.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            AreaPrestamos.setText("Error al listar los libros prestados.");
+        }
+    }
+
+    public void VolverPrestamos(ActionEvent actionEvent) throws IOException {
+        new CargarInterfaz(PrestamoInterfaz, "/org/example/bibliotecafx/InicioInterfaz.fxml");
+    }
+
+    public void LimpiarPrestamos(ActionEvent actionEvent) {
+        FechaPrestamo.clear();
+        ListarLibrosPrestados.clear();
+        ListarHistorial.clear();
+        AreaPrestamos.clear();
+    }
+
+    public void ListarHistorialSocio(ActionEvent actionEvent) {
+        try {
+            // Obtener el ID del socio desde el campo de texto (suponiendo que se ingresa un ID)
+            Integer idSocio = Integer.parseInt(ListarHistorial.getText());
+
+            // Obtener el historial de préstamos del socio
+            List<Prestamo> historialPrestamos = prestamoDAO.obtenerHistorialPrestamosPorSocio(idSocio);
+
+            // Crear un StringBuilder para mostrar los resultados
+            StringBuilder sb = new StringBuilder();
+            for (Prestamo prestamo : historialPrestamos) {
+                sb.append("Libro: ").append(prestamo.getLibro().getTitulo())
+                        .append(" | Fecha de Préstamo: ").append(prestamo.getFechaPrestamo())
+                        .append(" | Fecha de Devolución: ").append(prestamo.getFechaDevolucion()).append("\n");
+            }
+
+            // Mostrar los resultados en el área de texto
+            AreaPrestamos.setText(sb.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            AreaPrestamos.setText("Error al listar el historial del socio.");
+        }
+    }
 }
 
 

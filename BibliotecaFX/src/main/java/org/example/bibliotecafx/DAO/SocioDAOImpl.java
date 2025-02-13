@@ -39,9 +39,31 @@ public class SocioDAOImpl implements ISocioDAO {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            String hql = "FROM Socio s WHERE LOWER(s.nombreSocio) LIKE LOWER(:parametro) OR s.telefono LIKE :parametro";
-            Query<Socio> query = session.createQuery(hql, Socio.class);
-            query.setParameter("parametro", "%" + parametro + "%");
+
+            // Elimina caracteres no alfanuméricos del teléfono si es necesario
+            String parametroProcesado = parametro.replaceAll("[^a-zA-Z0-9]", "").trim();  // Elimina todo excepto letras y números
+
+            // Log para depuración
+            System.out.println("Buscando con el parámetro procesado: " + parametroProcesado);
+
+            // Si el parámetro parece un número de teléfono (solo contiene dígitos), usa comparación exacta
+            boolean esTelefono = parametroProcesado.matches("\\d+");
+
+            String hql;
+            Query<Socio> query;
+
+            if (esTelefono) {
+                // Búsqueda exacta para el teléfono
+                hql = "FROM Socio s WHERE LOWER(s.telefono) = LOWER(:parametro)";
+                query = session.createQuery(hql, Socio.class);
+                query.setParameter("parametro", parametroProcesado);  // Parámetro sin '%' para exactitud
+            } else {
+                // Búsqueda parcial para el nombre
+                hql = "FROM Socio s WHERE LOWER(s.nombre) LIKE LOWER(:parametro)";
+                query = session.createQuery(hql, Socio.class);
+                query.setParameter("parametro", "%" + parametroProcesado + "%");  // Parámetro con '%' para búsqueda parcial
+            }
+
             sociosEncontrados = query.list();
             transaction.commit();
 
@@ -49,7 +71,7 @@ public class SocioDAOImpl implements ISocioDAO {
             if (transaction != null) {
                 transaction.rollback();
             }
-            System.out.println("\n Error al buscar socios por parámetro: " + e.getMessage());
+            System.out.println("\nError al buscar socios por parámetro: " + e.getMessage());
         }
         return sociosEncontrados;
     }
@@ -89,4 +111,5 @@ public class SocioDAOImpl implements ISocioDAO {
             return session.createQuery("FROM Socio", Socio.class).getResultList();
         }
     }
+
 }

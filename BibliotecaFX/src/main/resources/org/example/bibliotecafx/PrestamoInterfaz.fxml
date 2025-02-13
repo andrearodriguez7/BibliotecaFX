@@ -13,25 +13,26 @@
 
         <children>
 
-            <HBox layoutX="175" layoutY="50" spacing="20">
+            <HBox layoutX="170" layoutY="50" spacing="20">
                 <Button onAction="#RegistroPrestamos" text="Registrar Préstamos" textAlignment="CENTER"/>
                 <Button onAction="#ListarLibrosPrestados" text="Listar Libros Prestados" textAlignment="CENTER"/>
-                <Button onAction="#ListarHistorial" text="Listar Historial" textAlignment="CENTER"/>
+                <Button onAction="#ListarHistorialSocio" text="Listar Historial Socios" textAlignment="CENTER"/>
                 <Button onAction="#VolverPrestamos" text="Volver" textAlignment="CENTER"/>
                 <Button onAction="#LimpiarPrestamos" text="Limpiar" textAlignment="CENTER"/>
             </HBox>
 
             <HBox layoutY="150" layoutX="40" spacing="20">
-                <Label text="Fecha Prestamo:"/>
+                <Label text="ID del libro:"/>
                 <TextField fx:id="FechaPrestamo"/>
 
                 <Label text="Listar Libros Prestados:"/>
                 <TextField fx:id="ListarLibrosPrestados"/>
 
-                <Label text="Listar Historial:"/>
+                <Label text="ID del Socio:"/>
                 <TextField fx:id="ListarHistorial"/>
 
             </HBox>
+
 
             <TextArea fx:id="AreaPrestamos" layoutY="300" layoutX="100" prefWidth="700" prefHeight="150"/>
 
