@@ -419,7 +419,7 @@ public class Gestion {
 
         String editorial = EditorialLibro.getText();
 
-        // Buscar el libro en la base de datos por el ISBN (puedes usar también ID si prefieres)
+        // Buscar el libro en la base de datos por el ISBN
         Libro libro = libroDAO.obtenerLibro(isbn);
         if (libro == null) {
             AreaLibros.setText("Error: No se encontró el libro con el ISBN proporcionado.");
@@ -440,9 +440,46 @@ public class Gestion {
     }
 
     public void BuscarLibro(ActionEvent actionEvent) {
+        // Obtener los valores de los campos de búsqueda
         String isbn = ISBNLibro.getText();
-        Libro libro = libroDAO.obtenerLibro(isbn);
+        String autor = AutorLibro.getText();
+        String titulo = TituloLibro.getText();
 
+        // Contar cuántos campos están llenos
+        int camposLlenos = 0;
+        if (!isbn.isEmpty()) camposLlenos++;
+        if (!autor.isEmpty()) camposLlenos++;
+        if (!titulo.isEmpty()) camposLlenos++;
+
+        // Validación: solo uno de los campos debe estar lleno
+        if (camposLlenos == 0) {
+            AreaLibros.setText("Por favor, complete al menos un campo de búsqueda (ISBN, Autor o Título).");
+            return;
+        } else if (camposLlenos > 1) {
+            AreaLibros.setText("Solo puede completar uno de los campos de búsqueda (ISBN, Autor o Título).");
+            return;
+        }
+
+        // Realizamos la búsqueda según el parámetro completado
+        Libro libro = null;
+
+        if (!isbn.isEmpty()) {
+            libro = libroDAO.obtenerLibro(isbn);  // Buscar por ISBN
+        } else if (!autor.isEmpty()) {
+            // Buscar por autor (asegurándonos que solo un parámetro es llenado)
+            List<Libro> librosPorAutor = libroDAO.obtenerLibrosPorAutor(autor);
+            if (!librosPorAutor.isEmpty()) {
+                libro = librosPorAutor.get(0);  // Supongo que queremos el primer libro encontrado
+            }
+        } else if (!titulo.isEmpty()) {
+            // Buscar por título
+            List<Libro> librosPorTitulo = libroDAO.obtenerLibrosPorTitulo(titulo);
+            if (!librosPorTitulo.isEmpty()) {
+                libro = librosPorTitulo.get(0);  // Supongo que queremos el primer libro encontrado
+            }
+        }
+
+        // Mostrar el resultado de la búsqueda
         if (libro != null) {
             TituloLibro.setText(libro.getTitulo());
             AutorLibro.setText(libro.getAutor().getNombre());
@@ -455,12 +492,13 @@ public class Gestion {
     }
 
     public void ListarLibro(ActionEvent actionEvent) {
-        List<Libro> libros = libroDAO.listarLibrosDisponibles();
+        List<Libro> libros = libroDAO.listarLibrosDisponibles();  // Llama al método actualizado
         StringBuilder sb = new StringBuilder("Libros disponibles:\n");
 
         for (Libro libro : libros) {
             sb.append(libro.toString()).append("\n");
         }
+
         AreaLibros.setText(sb.toString());
     }
 

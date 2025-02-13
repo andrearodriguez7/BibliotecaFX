@@ -14,7 +14,7 @@ public class Libro {
     private int anyoPublicacion;
 
     // Relación muchos a uno (Un libro tiene un autor)
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "autor_id", nullable = false) // Clave foránea con restricción de no nulo
     private Autor autor;
 

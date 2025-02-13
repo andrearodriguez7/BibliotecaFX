@@ -12,6 +12,4 @@ public interface ILibroDAO {
     List<Libro> listarLibrosDisponibles();
 
     List<Libro> obtenerLibrosPorAutor(String nombreAutor);
-
-    List<Libro> obtenerLibrosPorTitulo(String tituloLibro);
 }
